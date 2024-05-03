@@ -1,0 +1,63 @@
+---
+title: "What the package does"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{What the package does}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(MATH4753ALI24)
+```
+
+# Introduction:    
+This package holds multiple functions that can be useful for certain situations in statistics. Below are some descriptions/examples of some functions in this package. Aside from functions, this package also holds a dataset called FIREDAM, which is explained more in depth below.         
+
+# Function 1: meanclt (mean central limit theorem)
+This function generates random numbers from a uniform distribution, calculates the mean of each iteration, and plots a histogram of the sample means.    
+     
+```{r}
+library(MATH4753ALI24)
+meancltVar = MATH4753ALI24::meanclt(n = 10, iter = 10000)
+```
+      
+      
+# Function 2: randsample     
+This function makes random samples of size n between 1:10 with replacement, and makes a factor based on frequency of each number in the sample. Then, it makes a bar plot based on this factor. Below we generate 3 iterations of sample size n=20:     
+```{r}
+MATH4753ALI24::randsample(20, iter = 3)
+```
+
+      
+      
+# Function 3: 
+This function finds the parameter value that maximizes the likelihood function. Here we create the function logbin2, and pass it to the mymaxlikg function:          
+```{r}
+logbin2 <- function(theta) {
+    log(dbinom(3, prob = theta, size = 6)) +
+    log(dbinom(5, prob = theta, size = 10))
+}
+MATH4753ALI24::mymaxlikg(theta = seq(0, 1, length = 10000), lfun = logbin2)
+```
+    
+    
+# Function 4:     
+This function creates a normal curve based on a given mean, standard deviation, and limit for the probability calculation, which will be <= a. In this example, the mean is 5, the standard deviation is 10, and a is 3:     
+    
+```{r}
+MATH4753ALI24::myncurve(5, 10, 3)
+```
+    
+# Dataset: fire    
+fire is a data set collected concerning home damage from fire. It holds two variables: DISTANCE, which is the distance of a house fire from a fire station (in miles), and DAMAGE, which is the damage incurred from the house fire (in thousands of dollars). Below are the first 6 rows of this data set that has 15 rows total.        
+```{r}
+head(MATH4753ALI24::fire)
+```
